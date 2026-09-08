@@ -145,6 +145,50 @@
   height: auto;
 }
 
+/* Slanted tape sticker slapped across the wordmark.
+   The rotation is applied by motion via its `rotate` prop, so nothing here
+   may set `transform` — motion writes that whole property and would clobber
+   it. Horizontal centring therefore uses the separate `translate` property. */
+.hero__tape {
+  position: absolute;
+  top: 50%;
+  /* Overhangs the wordmark's left edge slightly, so it reads as slapped on
+     rather than neatly inset. */
+  left: -2.5rem;
+  z-index: 2;
+
+  padding: 1rem 3.4rem 1.1rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 2.8rem;
+  line-height: 1;
+  letter-spacing: 0.62rem;
+  text-indent: 0.62rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #221b00;
+
+  /* Sheen across the strip plus slightly darker long edges, which is what
+     stops it reading as a plain yellow rectangle. */
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.16) 0%,
+      rgba(255, 255, 255, 0.22) 18%,
+      rgba(255, 255, 255, 0) 46%,
+      rgba(0, 0, 0, 0.08) 82%,
+      rgba(0, 0, 0, 0.2) 100%
+    ),
+    linear-gradient(100deg, #e8c400 0%, #ffe14a 38%, #f3cf05 72%, #dfb800 100%);
+  /* Tape is not quite opaque — the wordmark ghosts through a little. */
+  opacity: 0.95;
+  box-shadow:
+    0 0.8rem 1.8rem -0.4rem rgba(0, 0, 0, 0.65),
+    0 0.2rem 0.5rem rgba(0, 0, 0, 0.35),
+    inset 0.3rem 0 0.5rem -0.2rem rgba(0, 0, 0, 0.28),
+    inset -0.3rem 0 0.5rem -0.2rem rgba(0, 0, 0, 0.28);
+}
+
 /* ============ Vision / Mission ============ */
 .vision-mission {
   position: relative;
