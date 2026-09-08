@@ -148,45 +148,119 @@
 /* Slanted tape sticker slapped across the wordmark.
    The rotation is applied by motion via its `rotate` prop, so nothing here
    may set `transform` — motion writes that whole property and would clobber
-   it. Horizontal centring therefore uses the separate `translate` property. */
+   it. */
 .hero__tape {
   position: absolute;
-  top: 50%;
-  /* Overhangs the wordmark's left edge slightly, so it reads as slapped on
-     rather than neatly inset. */
-  left: -2.5rem;
+  /* Seated on the upper-left of the wordmark and steeply tilted, so it
+     crosses ahead of the H rather than over it and HAMKES stays legible. */
+  top: 17%;
+  left: -3rem;
   z-index: 2;
 
-  padding: 1rem 3.4rem 1.1rem;
+  padding: 0.75rem 2.6rem 0.85rem;
   font-family: 'IBM Plex Mono', monospace;
   font-weight: 500;
-  font-size: 2.8rem;
+  font-size: 1.85rem;
   line-height: 1;
-  letter-spacing: 0.62rem;
-  text-indent: 0.62rem;
+  letter-spacing: 0.4rem;
+  text-indent: 0.4rem;
   text-transform: uppercase;
   white-space: nowrap;
   color: #221b00;
 
-  /* Sheen across the strip plus slightly darker long edges, which is what
-     stops it reading as a plain yellow rectangle. */
+  /* Torn ends: the long edges stay straight (cut from the roll) while both
+     ends are ragged, with the two ends deliberately asymmetric so it doesn't
+     look stamped. */
+  -webkit-clip-path: polygon(
+    2.4% 0%,
+    97.2% 0%,
+    98.6% 11%,
+    96.4% 23%,
+    99.3% 34%,
+    97.1% 47%,
+    100% 58%,
+    97.6% 71%,
+    99% 83%,
+    97.4% 100%,
+    2.8% 100%,
+    1.1% 88%,
+    3.2% 76%,
+    0.5% 64%,
+    2.6% 51%,
+    0% 39%,
+    2.2% 27%,
+    0.8% 15%
+  );
+  clip-path: polygon(
+    2.4% 0%,
+    97.2% 0%,
+    98.6% 11%,
+    96.4% 23%,
+    99.3% 34%,
+    97.1% 47%,
+    100% 58%,
+    97.6% 71%,
+    99% 83%,
+    97.4% 100%,
+    2.8% 100%,
+    1.1% 88%,
+    3.2% 76%,
+    0.5% 64%,
+    2.6% 51%,
+    0% 39%,
+    2.2% 27%,
+    0.8% 15%
+  );
+
   background-image:
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.16) 0%,
-      rgba(255, 255, 255, 0.22) 18%,
-      rgba(255, 255, 255, 0) 46%,
-      rgba(0, 0, 0, 0.08) 82%,
-      rgba(0, 0, 0, 0.2) 100%
+    /* Paper fibre. Two periods that don't divide evenly, so the striations
+       read as irregular rather than as a regular corduroy. */
+    repeating-linear-gradient(
+      92deg,
+      rgba(255, 255, 255, 0.04) 0 0.09rem,
+      rgba(0, 0, 0, 0.03) 0.09rem 0.2rem,
+      rgba(255, 255, 255, 0) 0.2rem 0.47rem
     ),
+    repeating-linear-gradient(
+      88deg,
+      rgba(0, 0, 0, 0.022) 0 0.13rem,
+      rgba(255, 255, 255, 0.03) 0.13rem 0.29rem,
+      rgba(255, 255, 255, 0) 0.29rem 0.71rem
+    ),
+    /* Sheen across the strip plus slightly darker long edges. */
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(255, 255, 255, 0.24) 16%,
+        rgba(255, 255, 255, 0) 46%,
+        rgba(0, 0, 0, 0.09) 80%,
+        rgba(0, 0, 0, 0.24) 100%
+      ),
     linear-gradient(100deg, #e8c400 0%, #ffe14a 38%, #f3cf05 72%, #dfb800 100%);
   /* Tape is not quite opaque — the wordmark ghosts through a little. */
-  opacity: 0.95;
-  box-shadow:
-    0 0.8rem 1.8rem -0.4rem rgba(0, 0, 0, 0.65),
-    0 0.2rem 0.5rem rgba(0, 0, 0, 0.35),
-    inset 0.3rem 0 0.5rem -0.2rem rgba(0, 0, 0, 0.28),
-    inset -0.3rem 0 0.5rem -0.2rem rgba(0, 0, 0, 0.28);
+  opacity: 0.94;
+  /* clip-path would cut a box-shadow off, so the cast shadow is a filter:
+     drop-shadow follows the torn silhouette instead of the element box. */
+  filter:
+    drop-shadow(0 0.7rem 1.4rem rgba(0, 0, 0, 0.6))
+    drop-shadow(0 0.15rem 0.35rem rgba(0, 0, 0, 0.4));
+}
+
+/* Adhesive shading along the torn ends: slightly darker and more transparent
+   where the tape has been pulled apart. */
+.hero__tape::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to right,
+      rgba(120, 95, 0, 0.4) 0%,
+      rgba(120, 95, 0, 0) 5%,
+      rgba(120, 95, 0, 0) 95%,
+      rgba(120, 95, 0, 0.34) 100%
+    );
 }
 
 /* ============ Vision / Mission ============ */

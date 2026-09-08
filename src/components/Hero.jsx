@@ -31,8 +31,8 @@ function Hero() {
             inside the wrap so it rides the same parallax as the wordmark. */}
         <motion.span
           className="hero__tape"
-          initial={{ opacity: 0, scale: 0.8, rotate: -22 }}
-          animate={{ opacity: 1, scale: 1, rotate: -8 }}
+          initial={{ opacity: 0, scale: 0.8, rotate: -32 }}
+          animate={{ opacity: 1, scale: 1, rotate: -17 }}
           transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1], delay: 0.85 }}
         >
           unofficial
