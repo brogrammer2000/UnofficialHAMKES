@@ -1,184 +1,470 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-}
-
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
-}
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
+.page {
   position: relative;
   width: 100%;
+  min-height: 100vh;
+  background: var(--bg);
+  overflow-x: clip;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+/* ============ Nav ============ */
+.nav {
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 15.6rem;
+  white-space: nowrap;
+}
+
+.nav__pill {
+  --glass-blur: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+  background: var(--glass-strong);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 0.4rem 0.6rem var(--shadow-color);
+  border: 0.15rem solid transparent;
+  transition: none;
+}
+
+.nav__pill img {
+  height: 1rem;
+  width: auto;
+}
+
+.nav__pill:hover {
+  border-radius: 3rem;
+  mix-blend-mode: difference;
+  background:
+    linear-gradient(var(--glass-strong), var(--glass-strong)) padding-box,
+    linear-gradient(180deg, #000000, #666666) border-box;
+}
+
+.nav__member {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.nav__member img {
+  height: 1rem;
+  width: auto;
+  transition: filter 0.3s linear;
+}
+
+.nav__member-underline {
+  position: absolute;
+  left: 0.3rem;
+  bottom: 0.5rem;
+  width: 14.3rem;
+  max-width: calc(100% - 0.6rem);
+  height: 0.3rem;
+  background: var(--wordmark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s linear;
+}
+
+.nav__member:hover img {
+  filter: brightness(0.85);
+}
+
+.nav__member:hover .nav__member-underline {
+  transform: scaleX(1);
+}
+
+/* ============ Hero ============ */
+.hero {
+  position: relative;
+  height: 76rem;
+  overflow: hidden;
+}
+
+/* The extracted mp4 has a Runway player scrubber + watermark baked into the
+   bottom ~10% of every frame (see figma-extract.local/DESIGN-SPEC.md
+   caveats). Render it 12% taller than the visible box, top-anchored, so the
+   contaminated strip lands below the fold and gets clipped by .hero's
+   overflow:hidden. */
+.hero__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 112%;
+  object-fit: fill;
+  z-index: 0;
+}
+
+.hero__wordmark-wrap {
+  position: absolute;
+  top: 22.6rem;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 1;
+  width: 79.5rem;
+  max-width: 90vw;
+}
+
+.hero__wordmark {
+  width: 100%;
+  height: auto;
+}
+
+/* ============ Vision / Mission ============ */
+.vision-mission {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5.9rem;
+  margin-top: -16.2rem;
+  padding: 0 2rem 6rem;
+}
+
+.vision-mission__card {
+  --glass-blur: 0rem;
+  width: 39.6rem;
+  max-width: 100%;
+  border-radius: 3rem;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.vision-mission__title img {
+  height: 4rem;
+  width: auto;
+}
+
+.vision-mission__body {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.6rem;
+  line-height: 1;
+  text-align: center;
+  color: var(--text);
+  max-width: 33.6rem;
+}
+
+/* ============ Values bar ============ */
+.values-bar {
+  --glass-blur: 2.6rem;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 3.7rem 0 2.1rem;
+  overflow: hidden;
+}
+
+.values-bar__title img {
+  height: 4rem;
+  width: auto;
+}
+
+.values-bar__ticker {
+  width: 100%;
+  max-width: 142.4rem;
+  margin: 0 auto;
+  padding: 0 4.5rem;
+}
+
+.values-bar__word img {
+  height: 1.5rem;
+  width: auto;
+}
+
+/* ============ Marquee ============ */
+.marquee {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll linear infinite;
+}
+
+.marquee__group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ============ Section links ============ */
+.section-links {
+  position: relative;
+  z-index: 1;
+  min-height: 46rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Fixed-height clipping box for the background media, independent of
+   .section-links' own height (which grows on hover to fit the revealed
+   photos) — otherwise the video's overscanned, chrome-hiding overflow can
+   end up inside the visible area instead of being clipped. */
+.section-links__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 39.5rem;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Same baked-in player-chrome fix as .hero__video: overscale and let
+   .section-links__bg's overflow:hidden clip the contaminated bottom strip. */
+.section-links__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 112%;
+  object-fit: fill;
+}
+
+.section-links__wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 105%;
+  object-fit: cover;
+  opacity: 0.68;
+}
+
+.section-links__row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 7.6rem;
+  padding: 4.6rem 2rem 0;
+  flex-wrap: wrap;
+}
+
+.section-links__item {
+  position: relative;
+  cursor: default;
+}
+
+.section-links__title img {
+  height: 4rem;
+  width: auto;
+}
+
+.section-links__underline {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 4.9rem;
+  width: 29.9rem;
+  max-width: 90vw;
+  height: 0.15rem;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  opacity: 0;
+  transition:
+    transform 0.3s cubic-bezier(0, 0, 0.58, 1),
+    opacity 0.3s cubic-bezier(0, 0, 0.58, 1);
+}
+
+.section-links__item--solid .section-links__underline {
+  background: var(--wordmark);
+}
+
+.section-links__item--gradient .section-links__underline {
+  background: var(--gradient-events);
+  mix-blend-mode: difference;
+}
+
+.section-links__photo {
+  position: absolute;
+  top: 5.6rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-1rem);
+  width: 36.7rem;
+  max-width: 90vw;
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.3s cubic-bezier(0, 0, 0.58, 1),
+    opacity 0.3s cubic-bezier(0, 0, 0.58, 1);
+}
+
+.section-links__item:hover .section-links__underline {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+.section-links__item:hover .section-links__photo {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ============ Sponsors ============ */
+.sponsors {
+  position: relative;
+  z-index: 2;
+  padding: 4.5rem 0 6rem;
+  text-align: center;
+}
+
+.sponsors__title img {
+  height: 4rem;
+  width: auto;
+  margin: 0 auto;
+}
+
+.sponsors__marquee {
+  margin-top: 3rem;
+}
+
+.sponsors__logo {
+  height: 6rem;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+/* ============ Social + tagline ============ */
+.social-tagline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11rem;
+  padding: 4rem 2rem;
+  flex-wrap: wrap;
+}
+
+.social-tagline__icons {
+  display: flex;
+  align-items: center;
+  gap: 2.6rem;
+}
+
+.social-tagline__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+}
+
+.social-tagline__icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.social-tagline__icon--instagram:hover img {
+  filter: brightness(0) saturate(100%) invert(88%);
+}
+
+.social-tagline__icon--linkedin:hover {
+  background: var(--linkedin-hover);
+  mix-blend-mode: difference;
+  border-radius: 50%;
+}
+
+.social-tagline__lockup {
+  width: 30rem;
+  max-width: 60vw;
+  height: auto;
+}
+
+/* ============ Footer ============ */
+.footer {
+  padding: 0 2rem 6rem;
+  display: flex;
+  justify-content: center;
+}
+
+.footer__card {
+  --glass-blur: 1.1rem;
+  position: relative;
+  width: 124.4rem;
+  max-width: 100%;
+  border-radius: 3rem;
+  padding: 5rem;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 21.2rem;
+}
+
+.footer__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.footer__wordmark {
+  height: 5.8rem;
+  width: auto;
+}
+
+.footer__contact,
+.footer__address {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.6rem;
+  line-height: 1.3;
+  color: var(--text);
+  text-align: left;
+}
+
+.footer__contact p,
+.footer__address p {
+  margin: 0 0 0.6rem;
+}
+
+.footer__contact p:last-child,
+.footer__address p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .nav {
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 92vw;
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+  .section-links__row {
+    gap: 3rem;
   }
 }
