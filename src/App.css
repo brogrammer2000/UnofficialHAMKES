@@ -808,6 +808,23 @@
   border-radius: 1.6rem;
 }
 
+/* ---- Contact: centred verse in the shared panel ---- */
+.contact__lyrics {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.8rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.contact__lyrics p {
+  margin: 0 0 2.4rem;
+}
+
+.contact__lyrics p:last-child {
+  margin-bottom: 0;
+}
+
 .section-page__back {
   position: relative;
   z-index: 1;
@@ -850,7 +867,8 @@
     height: 4.4rem;
   }
 
-  .about__body {
+  .about__body,
+  .contact__lyrics {
     font-size: 1.6rem;
   }
 

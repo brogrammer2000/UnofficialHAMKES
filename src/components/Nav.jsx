@@ -11,7 +11,7 @@ const pills = [
   { label: 'About', src: aboutSvg, to: '/about' },
   { label: 'Events', src: eventsSvg, to: '/events' },
   { label: 'Board', src: boardSvg },
-  { label: 'Contact', src: contactSvg },
+  { label: 'Contact', src: contactSvg, to: '/contact' },
 ]
 
 function Nav() {
