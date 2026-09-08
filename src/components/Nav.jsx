@@ -22,6 +22,15 @@ function Nav() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
+      <Link to="/" className="nav__home" aria-label="Home" title="Home">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M12 2.6 1.8 11.2h3v10.2h5V15h4.4v6.4h5V11.2h3z"
+          />
+        </svg>
+        <span className="nav__home-underline" aria-hidden="true" />
+      </Link>
       {pills.map((pill) =>
         /* Only the pills that have a route yet render as links; the rest stay
            inert buttons until their pages exist. */

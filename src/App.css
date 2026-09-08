@@ -19,6 +19,45 @@
   white-space: nowrap;
 }
 
+/* Home takes the "become a member" treatment rather than a pill: bare glyph,
+   the same brightness dip and the same underline wipe on hover. */
+.nav__home {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 0;
+  color: var(--text);
+}
+
+.nav__home svg {
+  display: block;
+  height: 1.6rem;
+  width: auto;
+  transition: filter 0.3s linear;
+}
+
+.nav__home-underline {
+  position: absolute;
+  left: 0;
+  bottom: 0.5rem;
+  width: 100%;
+  height: 0.3rem;
+  background: var(--wordmark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s linear;
+}
+
+.nav__home:hover svg,
+.nav__home:focus-visible svg {
+  filter: brightness(0.85);
+}
+
+.nav__home:hover .nav__home-underline,
+.nav__home:focus-visible .nav__home-underline {
+  transform: scaleX(1);
+}
+
 /* Layout only — the glassy part (lens vignette, soft depth shadow, rim
    hairline with its chromatic fringe) comes from .glass/.glass--strong in
    index.css, so the pills stay in step with the panels instead of carrying a
@@ -789,7 +828,9 @@
   text-underline-offset: 0.5rem;
 }
 
-@media (max-width: 640px) {
+/* The nav's 15.6rem gaps stop fitting a little earlier now that Home is in
+   the row, so the wrap kicks in above the old 640px breakpoint. */
+@media (max-width: 768px) {
   .nav {
     gap: 3rem;
     flex-wrap: wrap;
