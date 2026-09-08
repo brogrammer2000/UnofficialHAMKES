@@ -95,6 +95,15 @@ a {
 
    Everything is driven by --glass-blur so per-element radii stay in one place. */
 .glass {
+  /* Tint and sheen are variables so variants can restyle them without
+     replacing the whole background stack — overriding the `background`
+     shorthand in a variant silently dropped the lens vignette below. */
+  --glass-tint: var(--glass-card);
+  --glass-sheen-1: 0.13;
+  --glass-sheen-2: 0.04;
+  --glass-sheen-3: 0.08;
+  --glass-rim: 0.6;
+
   position: relative;
   isolation: isolate;
   background:
@@ -110,17 +119,17 @@ a {
     /* Soft specular sheen along the spec's -45° angle. */
       linear-gradient(
         135deg,
-        rgba(255, 255, 255, 0.13) 0%,
-        rgba(255, 255, 255, 0.04) 45%,
-        rgba(255, 255, 255, 0.08) 100%
+        rgba(255, 255, 255, var(--glass-sheen-1)) 0%,
+        rgba(255, 255, 255, var(--glass-sheen-2)) 45%,
+        rgba(255, 255, 255, var(--glass-sheen-3)) 100%
       ),
-    var(--glass-card);
+    var(--glass-tint);
   backdrop-filter: url(#glass-refract-tight) blur(var(--glass-blur, 0.6rem))
     saturate(135%) brightness(1.04);
   -webkit-backdrop-filter: blur(var(--glass-blur, 0.6rem)) saturate(135%)
     brightness(1.04);
   /* Depth from a wide, low-opacity falloff instead of one tight dark edge —
-       the brief explicitly rules out harsh shadows. */
+     the brief explicitly rules out harsh shadows. */
   box-shadow:
     0 1.4rem 3.2rem -0.9rem rgba(0, 0, 0, 0.5),
     0 0.3rem 0.8rem rgba(0, 0, 0, 0.16),
@@ -129,7 +138,7 @@ a {
 }
 
 /* Rim light / bevel: a hairline that catches the light from the top-left,
-   with a faint warm/cool split along it for the chromatic aberration the
+   with a faint cool/warm split along it for the chromatic aberration the
    spec records on Figma's Glass. Kept low-contrast so the edge stays soft
    rather than sharp. */
 .glass::before {
@@ -141,10 +150,10 @@ a {
   background:
     linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, var(--glass-rim)) 0%,
       rgba(255, 255, 255, 0.07) 34%,
       rgba(255, 255, 255, 0.03) 66%,
-      rgba(255, 255, 255, 0.32) 100%
+      rgba(255, 255, 255, calc(var(--glass-rim) * 0.53)) 100%
     ),
     linear-gradient(
       135deg,
@@ -166,14 +175,10 @@ a {
 }
 
 .glass--strong {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.16) 0%,
-      rgba(255, 255, 255, 0.06) 42%,
-      rgba(255, 255, 255, 0.11) 100%
-    ),
-    var(--glass-strong);
+  --glass-tint: var(--glass-strong);
+  --glass-sheen-1: 0.16;
+  --glass-sheen-2: 0.06;
+  --glass-sheen-3: 0.11;
 }
 
 /* Wider, softer refraction suits the full-bleed panels. */

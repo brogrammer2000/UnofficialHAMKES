@@ -22,7 +22,11 @@ function Nav() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       {pills.map((pill) => (
-        <button key={pill.label} type="button" className="nav__pill">
+        <button
+          key={pill.label}
+          type="button"
+          className="nav__pill glass glass--strong"
+        >
           <OutlineText src={pill.src} label={pill.label} />
         </button>
       ))}

@@ -19,30 +19,27 @@
   white-space: nowrap;
 }
 
+/* Layout only — the glassy part (lens vignette, soft depth shadow, rim
+   hairline with its chromatic fringe) comes from .glass/.glass--strong in
+   index.css, so the pills stay in step with the panels instead of carrying a
+   drifting copy of the recipe. */
 .nav__pill {
-  --glass-blur: 0.6rem;
+  --glass-blur: 0.8rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 1rem 1.5rem;
   border-radius: 2rem;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.06) 45%,
-      rgba(255, 255, 255, 0.12) 100%
-    ),
-    var(--glass-strong);
-  backdrop-filter: url(#glass-refract-tight) blur(var(--glass-blur))
-    saturate(135%) brightness(1.05);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(135%)
-    brightness(1.05);
+  /* The shared depth shadow is scaled for large panels; a 3.2rem-tall
+     control needs a proportionally tighter one. */
   box-shadow:
-    0 0.4rem 0.6rem var(--shadow-color),
-    inset 0 0.1rem 0.1rem rgba(255, 255, 255, 0.3);
-  border: 0.15rem solid transparent;
-  transition: none;
+    0 0.5rem 1.2rem -0.3rem rgba(0, 0, 0, 0.55),
+    0 0.15rem 0.4rem rgba(0, 0, 0, 0.2),
+    inset 0 0.1rem 0.1rem rgba(255, 255, 255, 0.3),
+    inset 0 -0.12rem 0.18rem rgba(255, 255, 255, 0.08);
+  transition:
+    border-radius 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .nav__pill img {
@@ -50,12 +47,16 @@
   width: auto;
 }
 
+/* Hover lifts the tint and brightens the rim rather than using the spec's
+   DIFFERENCE blend, which inverts the whole panel — vignette and rim
+   included — and fights the glass read. */
 .nav__pill:hover {
   border-radius: 3rem;
-  mix-blend-mode: difference;
-  background:
-    linear-gradient(var(--glass-strong), var(--glass-strong)) padding-box,
-    linear-gradient(180deg, #000000, #666666) border-box;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.nav__pill:hover::before {
+  --glass-rim: 0.9;
 }
 
 .nav__member {
