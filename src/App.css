@@ -760,6 +760,12 @@
   width: 94rem;
 }
 
+/* Wide enough for a readable measure without running the long entries out
+   to an unreadable line length. */
+.section-page__card--events {
+  width: 82rem;
+}
+
 .section-page__title {
   margin: 0;
   line-height: 0;
@@ -869,6 +875,44 @@
   background: #000;
 }
 
+/* ---- Events: a numbered log of non-events ---- */
+.events__log {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.6rem;
+  line-height: 1.75;
+  text-align: left;
+}
+
+.events__log li {
+  display: flex;
+  gap: 1.8rem;
+  padding: 2rem 0;
+  border-top: 0.1rem solid rgba(255, 255, 255, 0.12);
+}
+
+.events__log li:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.events__log li:last-child {
+  padding-bottom: 0;
+}
+
+.events__log p {
+  margin: 0;
+}
+
+.events__index {
+  flex: none;
+  color: var(--wordmark);
+  opacity: 0.45;
+}
+
 .section-page__back {
   position: relative;
   z-index: 1;
@@ -924,6 +968,14 @@
   .board__clips img {
     width: 22rem;
     height: 17rem;
+  }
+
+  .events__log {
+    font-size: 1.5rem;
+  }
+
+  .events__log li {
+    gap: 1.2rem;
   }
 
   .about__qr {

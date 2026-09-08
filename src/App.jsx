@@ -8,6 +8,7 @@ import Landing from './pages/Landing'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Board from './pages/Board'
+import Events from './pages/Events'
 import SectionPage from './pages/SectionPage'
 import './App.css'
 
@@ -45,7 +46,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<SectionPage section="services" />} />
-        <Route path="/events" element={<SectionPage section="events" />} />
+        <Route path="/events" element={<Events />} />
         <Route path="/news" element={<SectionPage section="news" />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/board" element={<Board />} />
