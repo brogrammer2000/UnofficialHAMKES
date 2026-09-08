@@ -9,6 +9,8 @@ import empowermentSvg from '../assets/svg/text/text-empowerment-15px.svg'
 import innovationSvg from '../assets/svg/text/text-innovation-15px.svg'
 import OutlineText from './OutlineText'
 import Marquee from './Marquee'
+import BgVideo from './BgVideo'
+import heroVideo from '../assets/video/hero-video-1080p.mp4'
 
 const values = [
   { key: 'collaboration', src: collaborationSvg, label: 'Collaboration' },
@@ -23,13 +25,21 @@ const values = [
 function ValuesBar() {
   return (
     <motion.section
-      className="values-bar glass glass--strong glass--noise"
-      style={{ '--glass-blur': '2.6rem' }}
+      className="values-bar"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
+      {/* The bar is glass, so it needs something behind it to refract —
+          the reference render shows the video's colour coming through. */}
+      <div className="values-bar__bg">
+        <BgVideo className="values-bar__video" src={heroVideo} rate={1.35} />
+      </div>
+      <div
+        className="values-bar__panel glass glass--strong glass--wide glass--noise"
+        style={{ '--glass-blur': '2.6rem' }}
+      >
       <OutlineText
         as="h2"
         className="values-bar__title"
@@ -46,6 +56,7 @@ function ValuesBar() {
           />
         ))}
       </Marquee>
+      </div>
     </motion.section>
   )
 }

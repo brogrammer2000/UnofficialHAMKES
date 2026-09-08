@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
+import GlassFilter from './components/GlassFilter'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import VisionMission from './components/VisionMission'
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <div className="page">
+      <GlassFilter />
       <Nav />
       <Hero />
       <VisionMission />

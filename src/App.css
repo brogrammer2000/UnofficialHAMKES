@@ -26,10 +26,21 @@
   justify-content: center;
   padding: 1rem 1.5rem;
   border-radius: 2rem;
-  background: var(--glass-strong);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: 0 0.4rem 0.6rem var(--shadow-color);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.06) 45%,
+      rgba(255, 255, 255, 0.12) 100%
+    ),
+    var(--glass-strong);
+  backdrop-filter: url(#glass-refract-tight) blur(var(--glass-blur))
+    saturate(190%) brightness(1.3);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%)
+    brightness(1.3);
+  box-shadow:
+    0 0.4rem 0.6rem var(--shadow-color),
+    inset 0 0.1rem 0.1rem rgba(255, 255, 255, 0.3);
   border: 0.15rem solid transparent;
   transition: none;
 }
@@ -130,8 +141,10 @@
   padding: 0 2rem 6rem;
 }
 
+/* The spec records blur 0 for these cards, but Figma's Glass still refracts
+   at 0 blur — in CSS that leaves a flat grey panel, so they get a real radius. */
 .vision-mission__card {
-  --glass-blur: 0rem;
+  --glass-blur: 1.6rem;
   width: 39.6rem;
   max-width: 100%;
   border-radius: 3rem;
@@ -159,16 +172,39 @@
 
 /* ============ Values bar ============ */
 .values-bar {
-  --glass-blur: 2.6rem;
   position: relative;
   z-index: 2;
+  width: 100%;
+  overflow: hidden;
+}
+
+.values-bar__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Overscaled + clipped to hide the mp4's baked-in player chrome, and pulled
+   up so the bar sits over a livelier part of the frame. */
+.values-bar__video {
+  position: absolute;
+  top: -60%;
+  left: 0;
+  width: 100%;
+  height: 220%;
+  object-fit: cover;
+}
+
+.values-bar__panel {
+  position: relative;
+  z-index: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.4rem;
   padding: 3.7rem 0 2.1rem;
-  overflow: hidden;
 }
 
 .values-bar__title img {
@@ -198,6 +234,7 @@
   display: flex;
   width: max-content;
   animation: marquee-scroll linear infinite;
+  will-change: transform;
 }
 
 .marquee__group {
@@ -208,18 +245,21 @@
 
 @keyframes marquee-scroll {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 /* ============ Section links ============ */
+/* Tall enough that the hover-revealed photo (which starts 5.6rem under the
+   title and runs 33.9rem) sits fully in view with room to spare, instead of
+   only being readable for a sliver of scroll. */
 .section-links {
   position: relative;
   z-index: 1;
-  min-height: 46rem;
+  min-height: 58rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -234,7 +274,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 39.5rem;
+  height: 41.6rem;
   overflow: hidden;
   z-index: 0;
 }
@@ -306,6 +346,8 @@
   mix-blend-mode: difference;
 }
 
+/* The photo itself keeps the reveal alive, so moving the cursor down onto it
+   doesn't immediately dismiss what you're trying to look at. */
 .section-links__photo {
   position: absolute;
   top: 5.6rem;
@@ -319,6 +361,25 @@
   transition:
     transform 0.3s cubic-bezier(0, 0, 0.58, 1),
     opacity 0.3s cubic-bezier(0, 0, 0.58, 1);
+}
+
+.section-links__item:hover .section-links__photo {
+  pointer-events: auto;
+}
+
+/* While a title is hovered, a transparent hit area spans the title *and* the
+   revealed photo, bridging the gap between them. It only exists during hover,
+   so it never overlaps the neighbouring titles at rest. */
+.section-links__item:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 36.7rem;
+  max-width: 90vw;
+  height: 39.5rem;
+  z-index: -1;
 }
 
 .section-links__item:hover .section-links__underline {
@@ -349,11 +410,12 @@
   margin-top: 3rem;
 }
 
+/* The extracted sponsor PNGs are already white artwork on transparency, so
+   they need no recolouring — a brightness(0)/invert(1) pass blew out their
+   alpha and rendered them as blank blocks. */
 .sponsors__logo {
   height: 6rem;
   width: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.9;
 }
 
 /* ============ Social + tagline ============ */

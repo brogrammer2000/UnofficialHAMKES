@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'motion/react'
 import { useRef } from 'react'
 import heroVideo from '../assets/video/hero-video-1080p.mp4'
 import wordmark from '../assets/svg/group-17-197-group-1.svg'
+import BgVideo from './BgVideo'
 
 function Hero() {
   const ref = useRef(null)
@@ -14,14 +15,7 @@ function Hero() {
 
   return (
     <div ref={ref} className="hero">
-      <video
-        className="hero__video"
-        src={heroVideo}
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
+      <BgVideo className="hero__video" src={heroVideo} />
       <motion.div className="hero__wordmark-wrap" style={{ y, opacity }}>
         <motion.img
           className="hero__wordmark"

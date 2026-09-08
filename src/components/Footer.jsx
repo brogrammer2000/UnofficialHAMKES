@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import heroVideo from '../assets/video/hero-video-1080p.mp4'
 import wordmark from '../assets/svg/group-67-35-group-2.svg'
+import BgVideo from './BgVideo'
 
 function Footer() {
   return (
@@ -13,14 +14,7 @@ function Footer() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <video
-          className="footer__video"
-          src={heroVideo}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        <BgVideo className="footer__video" src={heroVideo} />
         <img className="footer__wordmark" src={wordmark} alt="HAMKES" draggable={false} />
         <div className="footer__contact">
           <p>hamkes@hamk.fi</p>

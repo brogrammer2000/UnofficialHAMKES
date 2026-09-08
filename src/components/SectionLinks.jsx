@@ -8,6 +8,7 @@ import eventsTitle from '../assets/svg/text/text-events-40px.svg'
 import newsTitle from '../assets/svg/text/text-news-40px.svg'
 import agmTitle from '../assets/svg/text/text-agm-40px.svg'
 import OutlineText from './OutlineText'
+import BgVideo from './BgVideo'
 
 const links = [
   { key: 'services', src: servicesTitle, label: 'Services', variant: 'solid', photo: servicesPhoto },
@@ -20,14 +21,7 @@ function SectionLinks() {
   return (
     <section className="section-links">
       <div className="section-links__bg">
-        <video
-          className="section-links__video"
-          src={heroVideo}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        <BgVideo className="section-links__video" src={heroVideo} />
         <img className="section-links__wave" src={waveImg} alt="" />
       </div>
       <motion.div
