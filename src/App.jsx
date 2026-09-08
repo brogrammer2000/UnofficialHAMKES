@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import Landing from './pages/Landing'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import Board from './pages/Board'
 import SectionPage from './pages/SectionPage'
 import './App.css'
 
@@ -47,6 +48,7 @@ function App() {
         <Route path="/events" element={<SectionPage section="events" />} />
         <Route path="/news" element={<SectionPage section="news" />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/board" element={<Board />} />
       </Routes>
       <Footer />
     </div>

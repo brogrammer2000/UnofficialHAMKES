@@ -10,7 +10,7 @@ import OutlineText from './OutlineText'
 const pills = [
   { label: 'About', src: aboutSvg, to: '/about' },
   { label: 'Events', src: eventsSvg, to: '/events' },
-  { label: 'Board', src: boardSvg },
+  { label: 'Board', src: boardSvg, to: '/board' },
   { label: 'Contact', src: contactSvg, to: '/contact' },
 ]
 

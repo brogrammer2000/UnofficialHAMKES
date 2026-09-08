@@ -7,6 +7,7 @@ import servicesTitle from '../assets/svg/text/text-services-40px.svg'
 import eventsTitle from '../assets/svg/text/text-events-40px.svg'
 import newsTitle from '../assets/svg/text/text-news-40px.svg'
 import contactTitle from '../assets/svg/text/text-contact-10px.svg'
+import boardTitle from '../assets/svg/text/text-board-10px.svg'
 import BgVideo from '../components/BgVideo'
 import OutlineText from '../components/OutlineText'
 
@@ -20,6 +21,7 @@ const sections = {
   events: { label: 'Events', src: eventsTitle, accent: 'gradient' },
   news: { label: 'News', src: newsTitle, accent: 'solid' },
   contact: { label: 'Contact', src: contactTitle, accent: 'solid' },
+  board: { label: 'Board', src: boardTitle, accent: 'solid' },
 }
 
 function SectionPage({ section, cardClassName = '', children }) {
