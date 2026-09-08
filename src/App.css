@@ -663,13 +663,13 @@
    wordmark. Height matches .hero so the footer lands where it does at home. */
 .section-page {
   position: relative;
-  height: 76rem;
+  min-height: 76rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 3.5rem;
-  padding: 0 2rem;
+  padding: 14rem 2rem 6rem;
 }
 
 /* Same geometry and fade as .hero__video — the mp4's baked-in player chrome
@@ -704,11 +704,16 @@
   width: 62rem;
   max-width: 100%;
   border-radius: 3rem;
-  padding: 7rem 5rem;
+  padding: 6rem 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3rem;
+}
+
+/* Wider than a title-only panel so the credit lines don't wrap to orphans. */
+.section-page__card--about {
+  width: 68rem;
 }
 
 .section-page__title {
@@ -737,6 +742,31 @@
 
 .section-page__accent--gradient {
   background: var(--gradient-events);
+}
+
+/* ---- About: credits + donation QR inside the same panel ---- */
+.about__body {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.8rem;
+  line-height: 1.65;
+  text-align: center;
+  max-width: 54rem;
+}
+
+.about__body p {
+  margin: 0 0 1.6rem;
+}
+
+.about__body p:last-child {
+  margin-bottom: 0;
+}
+
+/* The PNG is already a white card with its own rounded border, so it only
+   needs sizing — no plate behind it. */
+.about__qr {
+  width: 20rem;
+  height: auto;
+  border-radius: 1.6rem;
 }
 
 .section-page__back {
@@ -777,5 +807,13 @@
 
   .section-page__title img {
     height: 4.4rem;
+  }
+
+  .about__body {
+    font-size: 1.6rem;
+  }
+
+  .about__qr {
+    width: 18rem;
   }
 }

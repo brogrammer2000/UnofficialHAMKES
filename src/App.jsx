@@ -5,6 +5,7 @@ import GlassFilter from './components/GlassFilter'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Landing from './pages/Landing'
+import About from './pages/About'
 import SectionPage from './pages/SectionPage'
 import './App.css'
 
@@ -40,6 +41,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/about" element={<About />} />
         <Route path="/services" element={<SectionPage section="services" />} />
         <Route path="/events" element={<SectionPage section="events" />} />
         <Route path="/news" element={<SectionPage section="news" />} />

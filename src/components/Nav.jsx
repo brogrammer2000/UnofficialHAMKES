@@ -8,7 +8,7 @@ import becomeMemberSvg from '../assets/svg/text/text-become-a-member-10px.svg'
 import OutlineText from './OutlineText'
 
 const pills = [
-  { label: 'About', src: aboutSvg },
+  { label: 'About', src: aboutSvg, to: '/about' },
   { label: 'Events', src: eventsSvg, to: '/events' },
   { label: 'Board', src: boardSvg },
   { label: 'Contact', src: contactSvg },
