@@ -284,52 +284,52 @@
   }
 }
 
-/* ============ Section links ============ */
-/* Tall enough that the hover-revealed photo (which starts 5.6rem under the
-   title and runs 33.9rem) sits fully in view with room to spare, instead of
-   only being readable for a sliver of scroll. */
+/* ============ Section links (flip cards) ============ */
 .section-links {
   position: relative;
   z-index: 1;
-  min-height: 58rem;
+  min-height: 38rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
 }
 
-/* Fixed-height clipping box for the background media, independent of
-   .section-links' own height (which grows on hover to fit the revealed
-   photos) — otherwise the video's overscanned, chrome-hiding overflow can
-   end up inside the visible area instead of being clipped. */
+/* Background band. The wave banner that used to sit here is gone; the video
+   alone backs the cards now, and it feeds the glass fronts something to
+   refract. Masked top and bottom so it has no hard edges. */
 .section-links__bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 41.6rem;
+  height: 36rem;
   overflow: hidden;
   z-index: 0;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    #000 14%,
+    #000 74%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    #000 14%,
+    #000 74%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
-/* Same baked-in player-chrome fix as .hero__video: overscale and let
-   .section-links__bg's overflow:hidden clip the contaminated bottom strip. */
+/* Overscaled + top-anchored so the mp4's baked-in player chrome sits below
+   the clipped area. */
 .section-links__video {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 112%;
+  height: 118%;
   object-fit: fill;
-}
-
-.section-links__wave {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 105%;
-  object-fit: cover;
-  opacity: 0.68;
 }
 
 .section-links__row {
@@ -338,90 +338,88 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 7.6rem;
+  gap: 5rem;
   padding: 4.6rem 2rem 0;
   flex-wrap: wrap;
 }
 
-.section-links__item {
-  position: relative;
-  cursor: default;
+/* ---- Flip card ----
+   The outer element owns the perspective and is what motion animates on
+   scroll-in; the flip lives on __inner so the two transforms never fight
+   over the same property. */
+.flip-card {
+  width: 28rem;
+  max-width: 100%;
+  height: 26rem;
+  perspective: 120rem;
+  cursor: pointer;
+  border-radius: 3rem;
 }
 
-.section-links__title img {
-  height: 4rem;
+.flip-card:focus-visible {
+  outline: 0.2rem solid var(--wordmark);
+  outline-offset: 0.6rem;
+}
+
+.flip-card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.flip-card:hover .flip-card__inner,
+.flip-card:focus-visible .flip-card__inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card__face {
+  position: absolute;
+  inset: 0;
+  border-radius: 3rem;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.flip-card__title img {
+  height: 3rem;
   width: auto;
 }
 
-.section-links__underline {
+/* Keeps the design's colour language: grey for services/news, the events
+   gradient for events. */
+.flip-card__accent {
   display: block;
-  position: absolute;
-  left: 50%;
-  top: 4.9rem;
-  width: 29.9rem;
-  max-width: 90vw;
-  height: 0.15rem;
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: center;
-  opacity: 0;
-  transition:
-    transform 0.3s cubic-bezier(0, 0, 0.58, 1),
-    opacity 0.3s cubic-bezier(0, 0, 0.58, 1);
+  width: 14rem;
+  max-width: 60%;
+  height: 0.5rem;
+  border-radius: 0.3rem;
 }
 
-.section-links__item--solid .section-links__underline {
+.flip-card__accent--solid {
   background: var(--wordmark);
 }
 
-.section-links__item--gradient .section-links__underline {
+.flip-card__accent--gradient {
   background: var(--gradient-events);
-  mix-blend-mode: difference;
 }
 
-/* The photo itself keeps the reveal alive, so moving the cursor down onto it
-   doesn't immediately dismiss what you're trying to look at. */
-.section-links__photo {
-  position: absolute;
-  top: 5.6rem;
-  left: 50%;
-  transform: translateX(-50%) translateY(-1rem);
-  width: 36.7rem;
-  max-width: 90vw;
-  height: auto;
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    transform 0.3s cubic-bezier(0, 0, 0.58, 1),
-    opacity 0.3s cubic-bezier(0, 0, 0.58, 1);
+.flip-card__back {
+  transform: rotateY(180deg);
+  background: #000;
 }
 
-.section-links__item:hover .section-links__photo {
-  pointer-events: auto;
-}
-
-/* While a title is hovered, a transparent hit area spans the title *and* the
-   revealed photo, bridging the gap between them. It only exists during hover,
-   so it never overlaps the neighbouring titles at rest. */
-.section-links__item:hover::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  translate: -50% 0;
-  width: 36.7rem;
-  max-width: 90vw;
-  height: 39.5rem;
-  z-index: -1;
-}
-
-.section-links__item:hover .section-links__underline {
-  transform: translateX(-50%) scaleX(1);
-  opacity: 1;
-}
-
-.section-links__item:hover .section-links__photo {
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
+.flip-card__back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ============ Sponsors ============ */
