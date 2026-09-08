@@ -35,9 +35,9 @@
     ),
     var(--glass-strong);
   backdrop-filter: url(#glass-refract-tight) blur(var(--glass-blur))
-    saturate(190%) brightness(1.3);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%)
-    brightness(1.3);
+    saturate(150%) brightness(1.08);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%)
+    brightness(1.08);
   box-shadow:
     0 0.4rem 0.6rem var(--shadow-color),
     inset 0 0.1rem 0.1rem rgba(255, 255, 255, 0.3);
@@ -141,18 +141,35 @@
   padding: 0 2rem 6rem;
 }
 
-/* The spec records blur 0 for these cards, but Figma's Glass still refracts
-   at 0 blur — in CSS that leaves a flat grey panel, so they get a real radius. */
+/* Same glass recipe as the footer card, which is the look we're matching:
+   an 11px radius, the stronger tint, noise, and a contained video. The spec
+   records blur 0 here, but in CSS that just leaves a flat grey panel. */
 .vision-mission__card {
-  --glass-blur: 1.6rem;
+  --glass-blur: 1.1rem;
+  position: relative;
   width: 39.6rem;
   max-width: 100%;
   border-radius: 3rem;
   padding: 3rem;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+}
+
+/* The footer card is wide enough (5.9:1) that object-fit:cover crops the
+   mp4's baked-in player chrome away on its own. These cards are 1.45:1 —
+   narrower than the video — so cover crops the sides and would leave the
+   chrome visible. Overscale vertically and top-anchor it instead. */
+.vision-mission__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 128%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .vision-mission__title img {
