@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { Link } from 'react-router-dom'
 import heroVideo from '../assets/video/hero-video-1080p.mp4'
 import servicesPhoto from '../assets/images/photo-services-chaotic-786x726.png'
 import eventsPhoto from '../assets/images/photo-events-group-527x512.png'
@@ -7,6 +8,8 @@ import eventsTitle from '../assets/svg/text/text-events-40px.svg'
 import newsTitle from '../assets/svg/text/text-news-40px.svg'
 import OutlineText from './OutlineText'
 import BgVideo from './BgVideo'
+
+const MotionLink = motion.create(Link)
 
 const links = [
   {
@@ -45,13 +48,13 @@ function SectionLinks() {
         viewport={{ once: true, amount: 0.3 }}
       >
         {links.map((link, i) => (
-          <motion.div
+          <MotionLink
             key={link.key}
-            /* tabIndex so the flip is reachable without a pointer — the CSS
-               also flips on :focus-visible. */
+            /* The card is the link to the section route; keyboard focus also
+               triggers the flip via :focus-visible in the CSS. */
+            to={`/${link.key}`}
             className="flip-card"
-            tabIndex={0}
-            aria-label={`${link.label} — flip for photo`}
+            aria-label={link.label}
             variants={{
               hidden: { opacity: 0, y: 24 },
               visible: {
@@ -78,7 +81,7 @@ function SectionLinks() {
                 <img src={link.photo} alt="" />
               </div>
             </div>
-          </motion.div>
+          </MotionLink>
         ))}
       </motion.div>
     </section>

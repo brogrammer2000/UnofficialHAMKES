@@ -26,6 +26,7 @@
 .nav__pill {
   --glass-blur: 0.8rem;
   display: inline-flex;
+  text-decoration: none;
   align-items: center;
   justify-content: center;
   padding: 1rem 1.5rem;
@@ -454,6 +455,8 @@
    scroll-in; the flip lives on __inner so the two transforms never fight
    over the same property. */
 .flip-card {
+  display: block;
+  text-decoration: none;
   width: 28rem;
   max-width: 100%;
   height: 26rem;
@@ -654,6 +657,108 @@
   margin-bottom: 0;
 }
 
+/* ============ Section pages (Services / Events / News) ============
+   A mirror of the landing page: the same background video under the same
+   fade, with a glass panel carrying the page title where the hero puts the
+   wordmark. Height matches .hero so the footer lands where it does at home. */
+.section-page {
+  position: relative;
+  height: 76rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5rem;
+  padding: 0 2rem;
+}
+
+/* Same geometry and fade as .hero__video — the mp4's baked-in player chrome
+   lives in the bottom ~10% of the frame, so the element overruns the section
+   and the mask reaches zero before that tail. */
+.section-page__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 101.7rem;
+  object-fit: fill;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 60%,
+    rgba(0, 0, 0, 0) 90%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 60%,
+    rgba(0, 0, 0, 0) 90%
+  );
+}
+
+.section-page__card {
+  --glass-blur: 1.1rem;
+  position: relative;
+  z-index: 1;
+  width: 62rem;
+  max-width: 100%;
+  border-radius: 3rem;
+  padding: 7rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.section-page__title {
+  margin: 0;
+  line-height: 0;
+}
+
+.section-page__title img {
+  height: 6rem;
+  width: auto;
+  max-width: 100%;
+}
+
+/* Same accent language as the landing cards. */
+.section-page__accent {
+  display: block;
+  width: 18rem;
+  max-width: 60%;
+  height: 0.6rem;
+  border-radius: 0.3rem;
+}
+
+.section-page__accent--solid {
+  background: var(--wordmark);
+}
+
+.section-page__accent--gradient {
+  background: var(--gradient-events);
+}
+
+.section-page__back {
+  position: relative;
+  z-index: 1;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.6rem;
+}
+
+.section-page__back a {
+  text-decoration: none;
+  opacity: 0.65;
+  transition: opacity 0.25s ease;
+}
+
+.section-page__back a:hover,
+.section-page__back a:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
+
 @media (max-width: 640px) {
   .nav {
     gap: 3rem;
@@ -664,5 +769,13 @@
 
   .section-links__row {
     gap: 3rem;
+  }
+
+  .section-page__card {
+    padding: 5rem 3rem;
+  }
+
+  .section-page__title img {
+    height: 4.4rem;
   }
 }
