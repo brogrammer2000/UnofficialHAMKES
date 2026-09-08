@@ -157,9 +157,10 @@
   padding: 0 2rem 6rem;
 }
 
-/* Same glass recipe as the footer card, which is the look we're matching:
-   an 11px radius, the stronger tint, noise, and a contained video. The spec
-   records blur 0 here, but in CSS that just leaves a flat grey panel. */
+/* These refract the hero video directly rather than carrying their own copy
+   of it — the hero band now fades out at the values bar, so there is live
+   video behind the cards' full height. The spec records blur 0 here, but in
+   CSS that just leaves a flat grey panel, so they keep an 11px radius. */
 .vision-mission__card {
   --glass-blur: 1.1rem;
   position: relative;
@@ -172,20 +173,6 @@
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-}
-
-/* The footer card is wide enough (5.9:1) that object-fit:cover crops the
-   mp4's baked-in player chrome away on its own. These cards are 1.45:1 —
-   narrower than the video — so cover crops the sides and would leave the
-   chrome visible. Overscale vertically and top-anchor it instead. */
-.vision-mission__video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 128%;
-  object-fit: cover;
-  z-index: -1;
 }
 
 .vision-mission__title img {

@@ -2,8 +2,6 @@ import { motion } from 'motion/react'
 import visionTitle from '../assets/svg/text/text-vision-40px.svg'
 import missionTitle from '../assets/svg/text/text-mission-40px.svg'
 import OutlineText from './OutlineText'
-import BgVideo from './BgVideo'
-import heroVideo from '../assets/video/hero-video-1080p.mp4'
 
 const cards = [
   {
@@ -32,10 +30,6 @@ function VisionMission() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: i * 0.15 }}
         >
-          {/* Contained video, same as the footer card: it keeps vivid colour
-              inside the panel instead of depending on whatever happens to be
-              behind it, which is what makes the footer read as polished. */}
-          <BgVideo className="vision-mission__video" src={heroVideo} rate={1.35} />
           <OutlineText
             as="h2"
             className="vision-mission__title"
