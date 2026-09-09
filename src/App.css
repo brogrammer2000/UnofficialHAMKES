@@ -913,6 +913,23 @@
   opacity: 0.45;
 }
 
+/* ---- Services: the question, then Shrek at your service ---- */
+.services__intro {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.8rem;
+  line-height: 1.65;
+  text-align: center;
+}
+
+/* Displayed under its 480px native width so it stays sharp. */
+.services__gif {
+  width: 42rem;
+  max-width: 100%;
+  border-radius: 1.6rem;
+  background: #000;
+}
+
 .section-page__back {
   position: relative;
   z-index: 1;
@@ -957,7 +974,8 @@
 
   .about__body,
   .contact__lyrics,
-  .board__intro {
+  .board__intro,
+  .services__intro {
     font-size: 1.6rem;
   }
 
