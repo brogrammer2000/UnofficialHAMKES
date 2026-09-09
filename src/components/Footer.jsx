@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import heroVideo from '../assets/video/hero-video-1080p.mp4'
 import wordmark from '../assets/svg/group-67-35-group-2.svg'
+import instagramSvg from '../assets/svg/group-65-192-property-1-default.svg'
 import BgVideo from './BgVideo'
 
 function Footer() {
@@ -17,17 +18,30 @@ function Footer() {
         <BgVideo className="footer__video" src={heroVideo} />
         <img className="footer__wordmark" src={wordmark} alt="HAMKES" draggable={false} />
         <div className="footer__contact">
-          <p>hamkes@hamk.fi</p>
-          <p>www.hamkes.fi</p>
+          <p>
+            <a href="https://unofficial-hamkes.vercel.app/">
+              https://unofficial-hamkes.vercel.app/
+            </a>
+          </p>
+          <a
+            className="footer__instagram"
+            href="https://www.instagram.com/sat.yum/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="sat.yum on Instagram"
+          >
+            <img src={instagramSvg} alt="" draggable={false} />
+            <span>sat.yum</span>
+          </a>
         </div>
         <div className="footer__address">
-          <p>HAMK Entrepreneurship Society ry</p>
           <p>
-            B126, Kaartokatu 2
+            Parolantie 12
             <br />
-            111 00&nbsp;&nbsp;Riihimäki
+            Hämeenlinna
+            <br />
+            13130
           </p>
-          <p>3510093-3</p>
         </div>
       </motion.div>
     </footer>

@@ -660,7 +660,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 21.2rem;
+  justify-content: space-between;
+  gap: 4rem;
 }
 
 .footer__video {
@@ -689,6 +690,25 @@
 .footer__contact p,
 .footer__address p {
   margin: 0 0 0.6rem;
+}
+
+.footer__instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+.footer__instagram img {
+  height: 2.4rem;
+  width: auto;
+}
+
+.footer__instagram:hover span,
+.footer__instagram:focus-visible span {
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
 }
 
 .footer__contact p:last-child,
