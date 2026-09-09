@@ -10,7 +10,7 @@ import Contact from './pages/Contact'
 import Board from './pages/Board'
 import Events from './pages/Events'
 import Services from './pages/Services'
-import SectionPage from './pages/SectionPage'
+import News from './pages/News'
 import './App.css'
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/events" element={<Events />} />
-        <Route path="/news" element={<SectionPage section="news" />} />
+        <Route path="/news" element={<News />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/board" element={<Board />} />
       </Routes>
